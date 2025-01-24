@@ -1,0 +1,24 @@
+#!/bin/bash
+
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+C="\e[36m"
+N="\e[0m"
+
+echo -e " $Y Disabling MySQL default version $N "
+dnf module disable mysql -y
+
+echo -e " $Y copy MySQL repo file $N "
+cp /home/centos/ecom-shell/mysql.repo /etc/yum.repos.d/mysql.repo
+
+echo -e " $ Y Install MySQL $N "
+dnf install mysql-community-server -y
+
+echo -e " $Y Start MySQL $N "
+systemctl enable mysqld
+systemctl start mysqld
+
+echo -e " $Y Get Default Password $N "
+mysql_secure_installation --set-root-pass RoboShop@1
+
