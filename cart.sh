@@ -16,35 +16,23 @@ echo -e " $Y Add Application user $N "
 useradd roboshop
 
 echo -e " $Y Add Application Diretory $N "
-rm -rf /app
 mkdir /app
 
 echo -e " $Y Download App content $N "
-curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip
+curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart.zip
 
 echo -e " $Y Unzip App content $N "
 cd /app
-unzip /tmp/user.zip
+unzip /tmp/cart.zip
 
 echo -e " $Y Install node dependencies $N "
 npm install
 
 
 echo -e " $Y Create App directory $N "
-cp /home/centos/ecom-shell/user.service /etc/systemd/system/user.service
+cp /home/centos/ecom-shell/cart.service /etc/systemd/system/cart.service
 
 echo -e " $Y Start user service $N "
 systemctl daemon-reload
 systemctl start user
 systemctl enable user
-
-echo -e " $Y Copy MongoDB repo $N "
-cp /home/centos/ecom-shell/mango.repo /etc/yum.repos.d/mango.repo
-
-echo -e " $Y install MongoDB client $N "
-yum install mongodb-org-shell -y
-
-echo -e " $Y Load schema $N "
-mongo --host mongodb-dev.devops91.cloud </app/schema/user.js
-
-
