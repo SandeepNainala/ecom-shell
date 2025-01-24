@@ -14,6 +14,7 @@ echo -e " $Y Add Application user $N "
 useradd roboshop
 
 echo -e " $Y Create Application directory $N "
+rm -rf /app
 mkdir /app
 
 echo -e " $Y Download App content $N "
