@@ -16,6 +16,7 @@ echo -e " $Y Add Application user $N "
 useradd roboshop
 
 echo -e " $Y Add Application Diretory $N "
+rm -rf /app
 mkdir /app
 
 echo -e " $Y Download App content $N "
@@ -28,11 +29,10 @@ unzip /tmp/cart.zip
 echo -e " $Y Install node dependencies $N "
 npm install
 
-
 echo -e " $Y Create App directory $N "
 cp /home/centos/ecom-shell/cart.service /etc/systemd/system/cart.service
 
-echo -e " $Y Start user service $N "
+echo -e " $Y Start cart service $N "
 systemctl daemon-reload
-systemctl start user
-systemctl enable user
+systemctl enable cart
+systemctl restart cart
