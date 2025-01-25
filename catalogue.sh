@@ -32,7 +32,7 @@ echo -e " $Y Install node packages $N "
 npm install
 
 echo -e " $Y Copy catalogue systemd files $N "
-cp /home/centos/ecom-shell/catalogue.service /etc/systemd/system/catalogue.service
+cp ${script_name}/catalogue.service /etc/systemd/system/catalogue.service
 
 echo -e " $Y Start catalogue service $N "
 systemctl daemon-reload
@@ -40,7 +40,7 @@ systemctl enable catalogue
 systemctl restart catalogue
 
 echo -e " $Y Copy mongoDB repo  $N "
-cp /home/centos/ecom-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
+cp ${script_name}/mongodb.repo /etc/yum.repos.d/mongodb.repo
 
 echo -e " $Y Install MongoDB repo $N "
 yum install mongodb-org -y

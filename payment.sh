@@ -30,7 +30,7 @@ echo -e " $Y Install Python dependencies $N "
 pip3.6 install -r requirements.txt
 
 echo -e " $Y Update Config file $N "
-cp /home/centos/ecom-shell/payment.service /etc/systemd/system/payment.service
+cp ${script_name}/payment.service /etc/systemd/system/payment.service
 
 echo -e " $Y Update Config file $N "
 systemctl daemon-reload

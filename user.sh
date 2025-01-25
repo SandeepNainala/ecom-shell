@@ -43,7 +43,7 @@ systemctl start user
 systemctl enable user
 
 echo -e " $Y Copy MongoDB repo $N "
-cp /home/centos/ecom-shell/mango.repo /etc/yum.repos.d/mango.repo
+cp ${script_name}/mango.repo /etc/yum.repos.d/mango.repo
 
 echo -e " $Y install MongoDB client $N "
 yum install mongodb-org-shell -y

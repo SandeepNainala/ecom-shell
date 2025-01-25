@@ -33,7 +33,7 @@ echo -e " $Y Install node dependencies $N "
 npm install
 
 echo -e " $Y Create App directory $N "
-cp /home/centos/ecom-shell/cart.service /etc/systemd/system/cart.service
+cp ${script_name}/cart.service /etc/systemd/system/cart.service
 
 echo -e " $Y Start cart service $N "
 systemctl daemon-reload

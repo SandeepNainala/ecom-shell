@@ -13,7 +13,7 @@ echo -e " $Y Disabling MySQL default version $N "
 dnf module disable mysql -y
 
 echo -e " $Y copy MySQL repo file $N "
-cp /home/centos/ecom-shell/mysql.repo /etc/yum.repos.d/mysql.repo
+cp ${script_name}/mysql.repo /etc/yum.repos.d/mysql.repo
 
 echo -e " $ Y Install MySQL $N "
 dnf install mysql-community-server -y
