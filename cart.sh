@@ -6,7 +6,8 @@ Y="\e[33m"
 C="\e[36m"
 N="\e[0m"
 
-socurce common.sh
+script_path=$(dirname $0)
+source ${script_path}/common.sh
 
 echo -e " $Y Configure nodeJs repos $N "
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash

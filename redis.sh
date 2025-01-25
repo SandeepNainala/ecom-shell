@@ -1,3 +1,7 @@
+
+script_path=$(dirname $0)
+source ${script_path}/common.sh
+
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"

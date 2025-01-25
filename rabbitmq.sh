@@ -6,6 +6,9 @@ Y="\e[33m"
 C="\e[36m"
 N="\e[0m"
 
+script_path=$(dirname $0)
+source ${script_path}/common.sh
+
 echo -e " $Y Setup Erlang repos $N "
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
 

@@ -1,12 +1,14 @@
 #!/bin/bash
 
+script_path=$(dirname $0)
+source ${script_path}/common.sh
+
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 C="\e[36m"
 N="\e[0m"
 
-source common.sh
 
 echo -e " $Y Configure nodeJs repos $N "
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
@@ -33,7 +35,7 @@ npm install
 
 
 echo -e " $Y Create App directory $N "
-cp /home/centos/ecom-shell/user.service /etc/systemd/system/user.service
+cp $script_path/user.service /etc/systemd/system/user.service
 
 echo -e " $Y Start user service $N "
 systemctl daemon-reload

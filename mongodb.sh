@@ -1,5 +1,8 @@
 #!/bin/bash
 
+script_path=$(dirname $0)
+source ${script_path}/common.sh
+
 cp mongodb.repo /etc/yum.repos.d/mongodb.repo
 yum install mongodb-org -y
 

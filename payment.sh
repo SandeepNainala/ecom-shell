@@ -6,7 +6,8 @@ Y="\e[33m"
 C="\e[36m"
 N="\e[0m"
 
-source common.sh
+script_path=$(dirname $0)
+source ${script_path}/common.sh
 
 echo -e " $Y Install Python3 $N "
 yum install python36 gcc python3-devel -y
