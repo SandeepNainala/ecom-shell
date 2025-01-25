@@ -34,6 +34,9 @@ echo -e " $Y Load schema $N "
 mysql -h mysql-dev.devops91.cloud -uroot -pRoboShop@1 < /app/schema/shipping.sql
 
 echo -e " $Y Copy shipping systemd files $N "
+cp /home/centos/ecom-shell/shipping.service /etc/systemd/system/shipping.service
+
+echo -e " $Y Copy shipping systemd files $N "
 systemctl daemon-reload
 systemctl enable shipping
 systemctl restart shipping
