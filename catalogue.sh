@@ -1,8 +1,12 @@
+#!/bin/bash
+
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 C="\e[36m"
 N="\e[0m"
+
+source common.sh
 
 echo -e " $Y configuring nodeJS repos $N "
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
@@ -11,7 +15,7 @@ echo -e " $Y Installing nodeJS repos $N "
 yum install nodejs -y
 
 echo -e " $Y Add Application user $N "
-useradd roboshop
+useradd ${app_user}
 
 echo -e " $Y Create Application directory $N "
 rm -rf /app

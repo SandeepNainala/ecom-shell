@@ -6,6 +6,8 @@ Y="\e[33m"
 C="\e[36m"
 N="\e[0m"
 
+socurce common.sh
+
 echo -e " $Y Configure nodeJs repos $N "
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
@@ -13,7 +15,7 @@ echo -e " $Y Install NodeJs  $N "
 dnf install nodejs -y
 
 echo -e " $Y Add Application user $N "
-useradd roboshop
+useradd ${app_user}
 
 echo -e " $Y Add Application Diretory $N "
 rm -rf /app

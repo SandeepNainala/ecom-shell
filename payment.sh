@@ -6,11 +6,13 @@ Y="\e[33m"
 C="\e[36m"
 N="\e[0m"
 
+source common.sh
+
 echo -e " $Y Install Python3 $N "
 yum install python36 gcc python3-devel -y
 
 echo -e " $Y Add Application user $N "
-useradd roboshop
+useradd ${app_user}
 
 echo -e " $Y Create Application directory $N "
 rm -rf /app

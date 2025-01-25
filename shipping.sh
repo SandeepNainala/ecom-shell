@@ -6,11 +6,13 @@ Y="\e[33m"
 C="\e[36m"
 N="\e[0m"
 
+soruce common.sh
+
 echo -e " $Y Install maven repos $N "
 yum install maven -y
 
 echo -e " $Y Add Application user $N "
-useradd roboshop
+useradd ${app_user}
 
 echo -e " $Y Create Application directory $N "
 rm -rf /app
