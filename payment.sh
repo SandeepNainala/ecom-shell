@@ -9,6 +9,7 @@ N="\e[0m"
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
+rabbitmq_appuser_password=$1
 
 echo -e " $Y Install Python3 $N "
 yum install python36 gcc python3-devel -y
@@ -31,6 +32,7 @@ echo -e " $Y Install Python dependencies $N "
 pip3.6 install -r requirements.txt
 
 echo -e " $Y Update Config file $N "
+sed -i -e "s|rabbitmq_appuser_password|${rabbitmq_appuser_password}|" ${script_name}/payment.service
 cp ${script_name}/payment.service /etc/systemd/system/payment.service
 
 echo -e " $Y Update Config file $N "
