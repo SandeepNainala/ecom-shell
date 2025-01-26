@@ -101,6 +101,7 @@ func_java(){
       echo -e " $G SUCCESS $N "
     else
       echo -e " $R FAILURE $N "
+      exit 1
   fi
 
   mv target/${component}-1.0.jar ${component}.jar
