@@ -1,5 +1,11 @@
 #!/bin/bash
 
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+C="\e[36m"
+N="\e[0m"
+
 app_user=roboshop
 script=$(realpath "$0")
 script_path=$(dirname "$script")
@@ -80,6 +86,12 @@ func_java(){
 
   print_head  " Install maven repository "
   yum install maven -y
+
+  if [ $? -eq 0 ]; then
+    echo -e " $G SUCCESS $N "
+  else
+    echo -e " $R FAILURE $N "
+  fi
 
   func_app_prereq
 
