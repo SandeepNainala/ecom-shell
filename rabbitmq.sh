@@ -11,6 +11,11 @@ script_path=$(dirname "$script")
 source ${script_path}/common.sh
 rabbitmq_appuser_password=$1
 
+if [ -z "${rabbitmq_appuser_password}" ]; then
+  echo -e " $R Provide the password for RabbitMQ app user $N "
+  exit 1
+fi
+
 echo -e " $Y Setup Erlang repos $N "
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
 

@@ -11,6 +11,11 @@ script_path=$(dirname "$script")
 source ${script_path}/common.sh
 mysql_root_password=$1
 
+if [ -z "${mysql_root_password}" ]; then
+  echo -e " $R Provide MySQL root password $N "
+  exit 1
+fi
+
 echo -e " $Y Install maven repos $N "
 yum install maven -y
 
