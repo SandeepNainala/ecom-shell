@@ -97,6 +97,12 @@ func_java(){
 
   print_head " Install maven dependencies "
   mvn clean package
+  if [ $? -eq 0 ]; then
+      echo -e " $G SUCCESS $N "
+    else
+      echo -e " $R FAILURE $N "
+  fi
+
   mv target/${component}-1.0.jar ${component}.jar
 
   func_schema_setup
