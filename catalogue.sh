@@ -14,9 +14,3 @@ component=catalogue
 
 func_nodejs
 
-echo -e " $Y Copy mongoDB repo  $N "
-cp ${script_name}/mongodb.repo /etc/yum.repos.d/mongodb.repo
-
-echo -e " $Y Install MongoDB repo $N "
-yum install mongodb-org -y
-mongo --host mongodb-dev.devops91.cloud </app/schema/catalogue.js

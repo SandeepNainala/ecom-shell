@@ -4,35 +4,54 @@ app_user=roboshop
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 
+print_head() {
+  echo -e "$Y =================== $* =================== $N"
+}
+
+schema_func(){
+  echo -e " $Y Copy mongoDB repo  $N "
+  cp ${script_name}/mongodb.repo /etc/yum.repos.d/mongodb.repo
+
+  echo -e " $Y Install MongoDB repo $N "
+  yum install mongodb-org -y
+
+  echo -e " $Y Start MongoDB $N "
+  mongo --host mongodb-dev.devops91.cloud </app/schema/${component}.js
+}
+
+
 func_nodejs(){
-  echo -e " $Y Configure nodeJs repos $N "
+
+  print_head "Configure nodeJs repos"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-  echo -e " $Y Install NodeJs  $N "
+  print_head "Install NodeJs"
   dnf install nodejs -y
 
-  echo -e " $Y Add Application user $N "
+  print_head "Add Application user"
   useradd ${app_user}
 
-  echo -e " $Y Add Application Diretory $N "
+  print_head "Add Application Diretory"
   rm -rf /app
   mkdir /app
 
-  echo -e " $Y Download App content $N "
+  print_head "Download App content"
   curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
 
-  echo -e " $Y Unzip App content $N "
+  print_head "Unzip App content"
   cd /app
   unzip /tmp/${component}.zip
 
-  echo -e " $Y Install node dependencies $N "
+  print_head "Install node dependencies"
   npm install
 
-  echo -e " $Y Create App directory $N "
+  print_head "Create App directory"
   cp ${script_name}/${component}.service /etc/systemd/system/${component}.service
 
-  echo -e " $Y Start cart service $N "
+  print_head "Start cart service"
   systemctl daemon-reload
   systemctl enable ${component}
   systemctl restart ${component}
+
+  schema_func
 }
