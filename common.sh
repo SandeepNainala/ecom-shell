@@ -9,14 +9,16 @@ print_head() {
 }
 
 schema_func(){
-  echo -e " $Y Copy mongoDB repo  $N "
-  cp ${script_name}/mongodb.repo /etc/yum.repos.d/mongodb.repo
+  if [ "$schema_setup" == "mongo" ]; then
+    print_head "Copy mongoDB repo file"
+    cp ${script_name}/mongodb.repo /etc/yum.repos.d/mongodb.repo
 
-  echo -e " $Y Install MongoDB repo $N "
-  yum install mongodb-org -y
+    print_head "Install MongoDB repo"
+    yum install mongodb-org -y
 
-  echo -e " $Y Start MongoDB $N "
-  mongo --host mongodb-dev.devops91.cloud </app/schema/${component}.js
+    print_head "Start MongoDB"
+    mongo --host mongodb-dev.devops91.cloud </app/schema/${component}.js
+  fi
 }
 
 

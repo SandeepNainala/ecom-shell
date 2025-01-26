@@ -12,6 +12,8 @@ N="\e[0m"
 
 component=user
 
+schema_setup=mongo
+
 fucn_nodejs
 
 
