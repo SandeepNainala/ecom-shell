@@ -19,6 +19,7 @@ func_status_check() {
     echo -e " $G SUCCESS $N "
   else
     echo -e " $R FAILURE $N "
+    echo "Refer the log file for more info: /tmp/roboshop.log"
     exit 1
   fi
 
