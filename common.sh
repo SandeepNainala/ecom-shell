@@ -12,7 +12,8 @@ script_path=$(dirname "$script")
 log_file=/tmp/roboshop.log
 
 print_head() {
-  echo -e "$Y =================== $* =================== $N"
+  echo -e "$Y =================== $1 =================== $N"
+  echo -e "$Y =================== $1 =================== $N" &>>$log_file
 }
 
 func_status_check() {
