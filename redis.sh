@@ -4,22 +4,21 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
 
-R="\e[31m"
-G="\e[32m"
-Y="\e[33m"
-C="\e[36m"
-N="\e[0m"
 
-echo -e " $Y Install Redis repos $N "
-yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+print_head "Redis"
+yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y $>>$logfile  # Install the Redis Repository
+func_status_check $?
 
-echo -e " $Y Install Redis repos $N "
-yum module enable redis:remi-6.2 -y
-yum install redis -y
+print_head "Install Redis"  # Install Redis
+dnf module enable redis:remi-6.2 -y $>>$logfile # Enable the Redis Module
+yum install redis -y $>>$logfile  # Install Redis
+func_status_check $?
 
-echo -e " $Y Update Redis Listen address $N "
-sed -i -e 's|127.0.0.1|0.0.0.0|' /etc/redis.conf /etc/redis/redis.conf
+print_head "Update Redis Configuration"   # Update the Redis Configuration file
+sed -i -e 's|127.0.0.1|0.0.0.0|' /etc/redis.conf /etc/redis/redis.conf $>>$logfile # Update the Redis Listen Address
+func_status_check $?
 
-echo -e " $Y Start Redis service $N "
-systemctl enable redis
-systemctl start redis
+print_head "Start Redis"  # Start Redis Service
+systemctl enable redis $>>$logfile  # Enable Redis Service
+systemctl restart redis $>>$logfile  # Start Redis Service
+func_status_check $?

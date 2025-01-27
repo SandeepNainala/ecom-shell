@@ -16,19 +16,24 @@ if [ -z "${rabbitmq_appuser_password}" ]; then
   exit 1
 fi
 
-echo -e " $Y Setup Erlang repos $N "
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+print_head "RabbitMQ Setup"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>$logfile # Install Erlang
+func_status_check $?
 
-echo -e " $Y Setup RabbitMQ repos $N "
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+print_head "Install RabbitMQ and Erlang"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>$logfile # Install RabbitMQ
+func_status_check $?
 
-echo -e " $Y Install RabbitMQ and erlang $N "
-yum install erlang rabbitmq-server -y
+print_head "Install RabbitMQ Server"
+yum install erlang rabbitmq-server -y &>>$logfile # Install RabbitMQ Server
+func_status_check $?
 
-echo -e " $Y Start rabbitMQ server $N "
-systemctl enable rabbitmq-server
-systemctl restart rabbitmq-server
+print_head "Start RabbitMQ Server"
+systemctl enable rabbitmq-server &>>$logfile # Start RabbitMQ Server
+systemctl restart rabbitmq-server &>>$logfile # Start RabbitMQ Server
+func_status_check $?
 
-echo -e " $Y Create App user in RabbitMQ $N "
-rabbitmqctl add_user roboshop ${rabbitmq_appuser_password}
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+print_head "Create RabbitMQ Application User" # This user is used by the application to connect to RabbitMQ
+rabbitmqctl add_user roboshop ${rabbitmq_appuser_password} &>>$logfile # Create RabbitMQ User
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$logfile # Set Permissions for RabbitMQ User
+func_status_check $?
