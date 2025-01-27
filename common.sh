@@ -132,3 +132,22 @@ func_java(){
   func_systemd_setup
 
 }
+
+func_python() {
+  print_head "Install Python3"
+  yum install python36 gcc python3-devel -y &>>$log_file # This will install the python3 & python3-devel packages
+  func_status_check $?
+
+  func_app_prereq # This function will create a application user & directory and download the application code
+
+  print_head "Install Python dependencies"
+  pip3.6 install -r requirements.txt &>>$log_file # This will install the dependencies from requirements.txt file
+  func_status_check $? # This will check the exit status of the previous command
+
+  print_head "Update App Configuration"
+  sed -i -e "s|rabbitmq_appuser_password|${rabbitmq_appuser_password}|" ${script_name}/${component}.service &>>$log_file # This will replace the password in the file
+  func_status_check $?
+
+
+  func_systemd_setup # This function will setup the systemd service for the component
+}
